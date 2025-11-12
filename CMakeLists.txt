@@ -15,4 +15,6 @@ target_sources(typical
     FILE_SET CXX_MODULES
     FILES
     include/modules/typical.ixx
+    include/modules/typical/lambda.ixx
+
 )

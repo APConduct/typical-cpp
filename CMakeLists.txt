@@ -16,5 +16,6 @@ target_sources(typical
     FILES
     include/modules/typical.ixx
     include/modules/typical/lambda.ixx
+    include/modules/typical/church.ixx
 
 )

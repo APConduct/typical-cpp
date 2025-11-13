@@ -3,9 +3,7 @@ module;
 #include <type_traits>
 
 
-export module typical;
-
-export import typical.lambda;
+export module typical.lambda;
 
 export namespace typical {
 
@@ -67,6 +65,30 @@ struct Shift<App<Func, Arg>, Amount, Cutoff> {
 
 template <typename Term, size_t Amount, size_t Cutoff = 0>
 using shift_t = Shift<Term, Amount, Cutoff>::Result;
+
+
+// Shift Down (for negative shifts)
+template <typename Term, size_t Amount, size_t Cutoff = 0>
+struct ShiftDown;
+
+template <size_t Index, size_t Amount, size_t Cutoff>
+struct ShiftDown<Var<Index>, Amount, Cutoff> {
+    using Result = std::conditional_t<(Index >= Cutoff), Var<Index - Amount>, Var<Index>>;
+};
+
+template <typename Body, size_t Amount, size_t Cutoff>
+struct ShiftDown<Abs<Body>, Amount, Cutoff> {
+    using Result = Abs<typename ShiftDown<Body, Amount, Cutoff + 1>::Result>;
+};
+
+template <typename Func, typename Arg, size_t Amount, size_t Cutoff>
+struct ShiftDown<App<Func, Arg>, Amount, Cutoff> {
+    using Result =
+        App<typename ShiftDown<Func, Amount, Cutoff>::Result, typename ShiftDown<Arg, Amount, Cutoff>::Result>;
+};
+
+template <typename Term, size_t Amount, size_t Cutoff = 0>
+using shift_down_t = typename ShiftDown<Term, Amount, Cutoff>::Result;
 
 
 template <typename Term, size_t Index, typename Replacement>
@@ -132,7 +154,7 @@ private:
     struct DoBetaReduction<Abs<Body>, A> {
         using Shifted = shift_t<A, 1>;
         using Substituted = subst_t<Body, 0, Shifted>;
-        using Result = shift_t<Substituted, 1, /* - */ 1>; // TODO: implement size_t wrap-around for negative shifts
+        using Result = shift_down_t<Substituted, 1>;
         static constexpr bool reduced = true;
     };
 
@@ -155,14 +177,43 @@ public:
     using Result = std::conditional_t<made_progress && (MaxSteps > 0), typename Eval<Step, MaxSteps - 1>::Result, Term>;
 };
 
+// Base case: prevent unsigned wraparound when MaxSteps == 0
+template <typename Term>
+struct Eval<Term, 0> {
+    using Result = Term;
+};
+
 template <typename Term, size_t MaxSteps = 1000>
 using eval_t = typename Eval<Term, MaxSteps>::Result;
 
 
-// Church Enconcodings
+// Church Encodings
 
 
 using True = Abs<Abs<Var<1>>>;
 using False = Abs<Abs<Var<0>>>;
+
+using Zero = Abs<Abs<Var<0>>>;
+using One = Abs<Abs<App<Var<1>, Var<0>>>>;
+using Two = Abs<Abs<App<Var<1>, App<Var<1>, Var<0>>>>>;
+
+using Succ = Abs<Abs<Abs<App<Var<1>, App<App<Var<2>, Var<1>>, Var<0>>>>>>;
+
+using Add = Abs<Abs<Abs<Abs<App<App<Var<3>, Var<1>>, App<App<Var<2>, Var<1>>, Var<0>>>>>>>;
+
+using Mul = Abs<Abs<Abs<App<Var<2>, App<Var<1>, Var<0>>>>>>;
+
+
+// ----------------
+
+using Id = Abs<Var<0>>;
+
+using Const = Abs<Abs<Var<1>>>;
+
+using Omega = App<Abs<App<Var<0>, Var<0>>>, Abs<App<Var<0>, Var<0>>>>;
+
+using Y = Abs<App<Abs<App<Var<1>, Abs<App<App<Var<1>, Var<1>>, Var<0>>>>>,
+                  Abs<App<Var<1>, Abs<App<App<Var<1>, Var<1>>, Var<0>>>>>>>;
+
 
 } // namespace typical

@@ -1,9 +1,6 @@
 module;
 
-export module typical.lambda;
+export module typical;
 
-export namespace typical {
-// Add your exported functions, classes, and types here
-struct Foo {};
-
-} // namespace typical
+export import typical.lambda;
+export import typical.church;

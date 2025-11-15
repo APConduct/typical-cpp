@@ -11,7 +11,6 @@ using typical::App;
 using typical::Const;
 using typical::eval_t;
 using typical::Id;
-using typical::is_abs;
 using typical::Var;
 
 // Church booleans from lambda module

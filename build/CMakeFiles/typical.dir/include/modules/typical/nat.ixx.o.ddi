@@ -1,0 +1,21 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/typical.dir/include/modules/typical/nat.ixx.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "typical.nat",
+          "source-path": "/Users/aidanjost/projects/cpp_place/typical/include/modules/typical/nat.ixx"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "typical.eq"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

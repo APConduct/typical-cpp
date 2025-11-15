@@ -1,0 +1,22 @@
+ninja_dyndep_version = 1.0
+build CMakeFiles/typical.dir/include/modules/typical.ixx.o | CMakeFiles/typical.dir/typical.pcm: dyndep | CMakeFiles/typical.dir/typical.lambda.pcm CMakeFiles/typical.dir/typical.church.pcm CMakeFiles/typical.dir/typical.nat.pcm CMakeFiles/typical.dir/typical.eq.pcm CMakeFiles/typical.dir/typical.set.pcm CMakeFiles/typical.dir/typical.calculus.pcm
+  restat = 1
+
+build CMakeFiles/typical.dir/include/modules/typical/lambda.ixx.o | CMakeFiles/typical.dir/typical.lambda.pcm: dyndep
+  restat = 1
+
+build CMakeFiles/typical.dir/include/modules/typical/church.ixx.o | CMakeFiles/typical.dir/typical.church.pcm: dyndep | CMakeFiles/typical.dir/typical.lambda.pcm
+  restat = 1
+
+build CMakeFiles/typical.dir/include/modules/typical/eq.ixx.o | CMakeFiles/typical.dir/typical.eq.pcm: dyndep | CMakeFiles/typical.dir/typical.lambda.pcm CMakeFiles/typical.dir/typical.church.pcm
+  restat = 1
+
+build CMakeFiles/typical.dir/include/modules/typical/set.ixx.o | CMakeFiles/typical.dir/typical.set.pcm: dyndep | CMakeFiles/typical.dir/typical.lambda.pcm
+  restat = 1
+
+build CMakeFiles/typical.dir/include/modules/typical/nat.ixx.o | CMakeFiles/typical.dir/typical.nat.pcm: dyndep | CMakeFiles/typical.dir/typical.eq.pcm
+  restat = 1
+
+build CMakeFiles/typical.dir/include/modules/typical/calculus.ixx.o | CMakeFiles/typical.dir/typical.calculus.pcm: dyndep
+  restat = 1
+

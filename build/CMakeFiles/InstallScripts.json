@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/aidanjost/projects/cpp_place/typical/build/cmake_install.cmake",
+		"/Users/aidanjost/projects/cpp_place/typical/build/tests/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

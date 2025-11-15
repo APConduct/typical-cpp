@@ -1,0 +1,8 @@
+-x c++-module
+-fmodule-output=CMakeFiles/typical.dir/typical.pcm
+-fmodule-file=typical.lambda=CMakeFiles/typical.dir/typical.lambda.pcm
+-fmodule-file=typical.church=CMakeFiles/typical.dir/typical.church.pcm
+-fmodule-file=typical.nat=CMakeFiles/typical.dir/typical.nat.pcm
+-fmodule-file=typical.eq=CMakeFiles/typical.dir/typical.eq.pcm
+-fmodule-file=typical.set=CMakeFiles/typical.dir/typical.set.pcm
+-fmodule-file=typical.calculus=CMakeFiles/typical.dir/typical.calculus.pcm

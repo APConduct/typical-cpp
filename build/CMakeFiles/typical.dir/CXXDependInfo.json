@@ -1,0 +1,92 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "Clang",
+	"compiler-simulate-id" : "",
+	"config" : "",
+	"cxx-modules" : 
+	{
+		"CMakeFiles/typical.dir/include/modules/typical.ixx.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "include/modules",
+			"source" : "/Users/aidanjost/projects/cpp_place/typical/include/modules/typical.ixx",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		},
+		"CMakeFiles/typical.dir/include/modules/typical/calculus.ixx.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "include/modules/typical",
+			"source" : "/Users/aidanjost/projects/cpp_place/typical/include/modules/typical/calculus.ixx",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		},
+		"CMakeFiles/typical.dir/include/modules/typical/church.ixx.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "include/modules/typical",
+			"source" : "/Users/aidanjost/projects/cpp_place/typical/include/modules/typical/church.ixx",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		},
+		"CMakeFiles/typical.dir/include/modules/typical/eq.ixx.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "include/modules/typical",
+			"source" : "/Users/aidanjost/projects/cpp_place/typical/include/modules/typical/eq.ixx",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		},
+		"CMakeFiles/typical.dir/include/modules/typical/lambda.ixx.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "include/modules/typical",
+			"source" : "/Users/aidanjost/projects/cpp_place/typical/include/modules/typical/lambda.ixx",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		},
+		"CMakeFiles/typical.dir/include/modules/typical/nat.ixx.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "include/modules/typical",
+			"source" : "/Users/aidanjost/projects/cpp_place/typical/include/modules/typical/nat.ixx",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		},
+		"CMakeFiles/typical.dir/include/modules/typical/set.ixx.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "include/modules/typical",
+			"source" : "/Users/aidanjost/projects/cpp_place/typical/include/modules/typical/set.ixx",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		}
+	},
+	"database-info" : null,
+	"dir-cur-bld" : "/Users/aidanjost/projects/cpp_place/typical/build",
+	"dir-cur-src" : "/Users/aidanjost/projects/cpp_place/typical",
+	"dir-top-bld" : "/Users/aidanjost/projects/cpp_place/typical/build",
+	"dir-top-src" : "/Users/aidanjost/projects/cpp_place/typical",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/Users/aidanjost/projects/cpp_place/typical/build/CMakeFiles/typical.dir",
+	"sources" : {}
+}

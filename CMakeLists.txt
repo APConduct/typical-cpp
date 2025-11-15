@@ -17,5 +17,14 @@ target_sources(typical
     include/modules/typical.ixx
     include/modules/typical/lambda.ixx
     include/modules/typical/church.ixx
-
+    include/modules/typical/eq.ixx
+    include/modules/typical/set.ixx
+    include/modules/typical/nat.ixx
+    include/modules/typical/calculus.ixx
 )
+
+# Enable testing
+enable_testing()
+
+# Add tests subdirectory
+add_subdirectory(tests)

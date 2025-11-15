@@ -1,0 +1,14 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "tests/CMakeFiles/lambda_tests.dir/lambda_tests.cpp.o",
+      "requires": [
+        {
+          "logical-name": "typical.lambda"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

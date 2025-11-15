@@ -1,0 +1,30 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "Clang",
+	"compiler-simulate-id" : "",
+	"config" : "",
+	"cxx-modules" : {},
+	"database-info" : null,
+	"dir-cur-bld" : "/Users/aidanjost/projects/cpp_place/typical/build/tests",
+	"dir-cur-src" : "/Users/aidanjost/projects/cpp_place/typical/tests",
+	"dir-top-bld" : "/Users/aidanjost/projects/cpp_place/typical/build",
+	"dir-top-src" : "/Users/aidanjost/projects/cpp_place/typical",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : 
+	[
+		"/Users/aidanjost/projects/cpp_place/typical/build/CMakeFiles/typical.dir"
+	],
+	"module-dir" : "/Users/aidanjost/projects/cpp_place/typical/build/tests/CMakeFiles/lambda_tests.dir",
+	"sources" : 
+	{
+		"tests/CMakeFiles/lambda_tests.dir/lambda_tests.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/Users/aidanjost/projects/cpp_place/typical/tests/lambda_tests.cpp"
+		}
+	}
+}

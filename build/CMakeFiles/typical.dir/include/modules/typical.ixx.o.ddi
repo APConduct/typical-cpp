@@ -1,0 +1,36 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/typical.dir/include/modules/typical.ixx.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "typical",
+          "source-path": "/Users/aidanjost/projects/cpp_place/typical/include/modules/typical.ixx"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "typical.lambda"
+        },
+        {
+          "logical-name": "typical.church"
+        },
+        {
+          "logical-name": "typical.nat"
+        },
+        {
+          "logical-name": "typical.eq"
+        },
+        {
+          "logical-name": "typical.set"
+        },
+        {
+          "logical-name": "typical.calculus"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

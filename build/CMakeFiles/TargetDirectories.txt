@@ -1,0 +1,6 @@
+/Users/aidanjost/projects/cpp_place/typical/build/CMakeFiles/typical.dir
+/Users/aidanjost/projects/cpp_place/typical/build/CMakeFiles/edit_cache.dir
+/Users/aidanjost/projects/cpp_place/typical/build/CMakeFiles/rebuild_cache.dir
+/Users/aidanjost/projects/cpp_place/typical/build/tests/CMakeFiles/lambda_tests.dir
+/Users/aidanjost/projects/cpp_place/typical/build/tests/CMakeFiles/edit_cache.dir
+/Users/aidanjost/projects/cpp_place/typical/build/tests/CMakeFiles/rebuild_cache.dir

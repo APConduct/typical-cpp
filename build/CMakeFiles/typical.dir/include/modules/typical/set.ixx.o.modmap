@@ -1,0 +1,3 @@
+-x c++-module
+-fmodule-output=CMakeFiles/typical.dir/typical.set.pcm
+-fmodule-file=typical.lambda=CMakeFiles/typical.dir/typical.lambda.pcm

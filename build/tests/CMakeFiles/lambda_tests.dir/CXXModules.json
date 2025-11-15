@@ -1,0 +1,72 @@
+{
+	"modules" : {},
+	"references" : 
+	{
+		"typical" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/typical.dir/typical.pcm"
+		},
+		"typical.calculus" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/typical.dir/typical.calculus.pcm"
+		},
+		"typical.church" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/typical.dir/typical.church.pcm"
+		},
+		"typical.eq" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/typical.dir/typical.eq.pcm"
+		},
+		"typical.lambda" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/typical.dir/typical.lambda.pcm"
+		},
+		"typical.nat" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/typical.dir/typical.nat.pcm"
+		},
+		"typical.set" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/typical.dir/typical.set.pcm"
+		}
+	},
+	"usages" : 
+	{
+		"typical" : 
+		[
+			"typical.calculus",
+			"typical.church",
+			"typical.eq",
+			"typical.lambda",
+			"typical.nat",
+			"typical.set"
+		],
+		"typical.church" : 
+		[
+			"typical.lambda"
+		],
+		"typical.eq" : 
+		[
+			"typical.church",
+			"typical.lambda"
+		],
+		"typical.nat" : 
+		[
+			"typical.church",
+			"typical.eq",
+			"typical.lambda"
+		],
+		"typical.set" : 
+		[
+			"typical.lambda"
+		]
+	}
+}

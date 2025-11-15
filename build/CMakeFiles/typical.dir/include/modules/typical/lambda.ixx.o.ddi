@@ -1,0 +1,16 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/typical.dir/include/modules/typical/lambda.ixx.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "typical.lambda",
+          "source-path": "/Users/aidanjost/projects/cpp_place/typical/include/modules/typical/lambda.ixx"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

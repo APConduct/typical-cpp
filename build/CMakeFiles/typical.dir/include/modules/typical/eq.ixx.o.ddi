@@ -1,0 +1,24 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/typical.dir/include/modules/typical/eq.ixx.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "typical.eq",
+          "source-path": "/Users/aidanjost/projects/cpp_place/typical/include/modules/typical/eq.ixx"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "typical.lambda"
+        },
+        {
+          "logical-name": "typical.church"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

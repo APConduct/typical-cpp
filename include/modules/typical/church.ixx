@@ -95,7 +95,7 @@ protected:
             return 2;
         }
         else {
-            // For arbitrary Church numerals, we'd need to evaluate them
+            // TODO: For arbitrary Church numerals, evaluate them
             // with a proper extractor function
             return 999;
         }
@@ -140,7 +140,6 @@ using IsLeft = Abs<App<App<Var<0>, Abs<True>>, Abs<False>>>;
 using IsRight = Abs<App<App<Var<0>, Abs<False>>, Abs<True>>>;
 
 // Tests
-
 
 
 } // namespace typical

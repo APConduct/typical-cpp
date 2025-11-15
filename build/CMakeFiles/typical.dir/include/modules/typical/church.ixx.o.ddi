@@ -1,0 +1,21 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/typical.dir/include/modules/typical/church.ixx.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "typical.church",
+          "source-path": "/Users/aidanjost/projects/cpp_place/typical/include/modules/typical/church.ixx"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "typical.lambda"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

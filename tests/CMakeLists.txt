@@ -29,3 +29,18 @@ set_target_properties(lambda_advanced_tests PROPERTIES
 
 # Add the advanced test
 add_test(NAME lambda_advanced_tests COMMAND lambda_advanced_tests)
+
+# Add test executable for church module tests
+add_executable(church_tests church_tests.cpp)
+
+# Link against the typical library
+target_link_libraries(church_tests PRIVATE typical)
+
+# Set C++ standard
+set_target_properties(church_tests PROPERTIES
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+)
+
+# Add the church test
+add_test(NAME church_tests COMMAND church_tests)

@@ -13,7 +13,7 @@ using Pair = Abs<Abs<Abs<App<App<Var<0>, Var<2>>, Var<1>>>>>;
 
 using Fst = Abs<App<Var<0>, Abs<Abs<Var<1>>>>>;
 
-using Snd = Abs<App<Var<0>, Abs<Abs<Var<1>>>>>;
+using Snd = Abs<App<Var<0>, Abs<Abs<Var<0>>>>>;
 
 template <typename A, typename B>
 using MakePair = App<App<Pair, A>, B>;

@@ -242,12 +242,14 @@ struct LessThan<Z, S<N>> {
 template <Nat M>
 struct LessThan<S<M>, Z> {
     static constexpr bool value = false;
+    using Proof = void;
 };
 
 
 template <>
 struct LessThan<Z, Z> {
     static constexpr bool value = false;
+    using Proof = void;
 };
 
 template <Nat M, Nat N>
@@ -419,9 +421,8 @@ struct Fibonacci<One> {
 };
 
 template <Nat N>
-    requires(!is_zero_v<N>)
 struct Fibonacci<S<S<N>>> {
-    using Result = add_t<Fibonacci<typename S<N>::Result>, typename Fibonacci<N>::Result>;
+    using Result = add_t<typename Fibonacci<S<N>>::Result, typename Fibonacci<N>::Result>;
 };
 
 template <Nat N>

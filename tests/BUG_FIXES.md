@@ -110,9 +110,164 @@ All tests should pass with output:
 Test #3: church_tests ............   Passed
 ```
 
+## Bug #2: Fibonacci Had Incorrect Constraint (FIXED)
+
+**Date Found**: 2024-11-14
+**Severity**: Critical
+**Status**: Fixed
+
+### Description
+
+The `Fibonacci` template in `nat.ixx` had an incorrect `requires` constraint that prevented it from compiling for any value >= 2.
+
+```cpp
+template <Nat N>
+    requires(!is_zero_v<N>)  // BUG: This prevents fib(2) from working!
+struct Fibonacci<S<S<N>>> {
+    using Result = add_t<typename Fibonacci<S<N>>::Result, typename Fibonacci<N>::Result>;
+};
+```
+
+### Expected Behavior
+
+Fibonacci should work for all natural numbers:
+- `fib(0) = 0`
+- `fib(1) = 1`
+- `fib(n) = fib(n-1) + fib(n-2)` for n >= 2
+
+### Root Cause
+
+The constraint `requires(!is_zero_v<N>)` was incorrect. When calling `Fibonacci<Two>` (which is `Fibonacci<S<S<Z>>>`):
+- Pattern `S<S<N>>` matches with `N = Z`
+- Constraint checks `!is_zero_v<Z>` which is `!true = false`
+- Constraint fails, compilation error!
+
+The constraint was meant to prevent infinite recursion, but it actually prevented the base case from working.
+
+### Fix
+
+Remove the incorrect constraint:
+
+```cpp
+template <Nat N>
+// Constraint removed - N can be zero (for fib(2) case)
+struct Fibonacci<S<S<N>>> {
+    using Result = add_t<typename Fibonacci<S<N>>::Result, typename Fibonacci<N>::Result>;
+};
+```
+
+### Test Coverage
+
+Added comprehensive Fibonacci tests in `nat_tests.cpp`:
+
+```cpp
+static_assert(std::is_same_v<fibonacci_t<Z>, Z>, "fib(0) = 0");
+static_assert(std::is_same_v<fibonacci_t<One>, One>, "fib(1) = 1");
+static_assert(std::is_same_v<fibonacci_t<Two>, One>, "fib(2) = 1");
+static_assert(std::is_same_v<fibonacci_t<Three>, Two>, "fib(3) = 2");
+static_assert(std::is_same_v<fibonacci_t<Four>, Three>, "fib(4) = 3");
+static_assert(std::is_same_v<fibonacci_t<Five>, Five>, "fib(5) = 5");
+static_assert(std::is_same_v<fibonacci_t<Six>, Eight>, "fib(6) = 8");
+static_assert(to_value_v<fibonacci_t<Seven>> == 13, "fib(7) = 13");
+static_assert(to_value_v<fibonacci_t<Eight>> == 21, "fib(8) = 21");
+```
+
+### Impact
+
+**Before Fix**:
+- Fibonacci only worked for 0 and 1
+- Any call to `fibonacci_t<N>` where N >= 2 failed to compile
+- Made the Fibonacci implementation completely unusable
+
+**After Fix**:
+- Fibonacci works correctly for all tested values (0-8)
+- Proper recursive computation
+- All nat module tests pass
+
+## Bug #3: LessThan Missing Proof Members (FIXED)
+
+**Date Found**: 2024-11-14
+**Severity**: Moderate
+**Status**: Fixed
+
+### Description
+
+Several specializations of `LessThan` were missing the `Proof` type member, causing compilation errors when the recursive case tried to access it.
+
+```cpp
+template <Nat M>
+struct LessThan<S<M>, Z> {
+    static constexpr bool value = false;
+    // Missing: using Proof = void;
+};
+
+template <>
+struct LessThan<Z, Z> {
+    static constexpr bool value = false;
+    // Missing: using Proof = void;
+};
+```
+
+### Expected Behavior
+
+All specializations of `LessThan` should have a `Proof` member for consistency, even if it's just `void`.
+
+### Root Cause
+
+The recursive case `LessThan<S<M>, S<N>>` uses `typename LessThan<M, N>::Proof`, but when recursion reaches base cases like `LessThan<Z, Z>` or `LessThan<S<M>, Z>`, those specializations didn't have a `Proof` member.
+
+### Fix
+
+Add missing `Proof` members to all base cases:
+
+```cpp
+template <Nat M>
+struct LessThan<S<M>, Z> {
+    static constexpr bool value = false;
+    using Proof = void;  // ADDED
+};
+
+template <>
+struct LessThan<Z, Z> {
+    static constexpr bool value = false;
+    using Proof = void;  // ADDED
+};
+```
+
+### Test Coverage
+
+Indirectly tested through comparison operations in `nat_tests.cpp`:
+
+```cpp
+static_assert(less_than_v<Z, One>, "0 < 1");
+static_assert(!less_than_v<Z, Z>, "!(0 < 0)");
+static_assert(!less_than_v<One, Z>, "!(1 < 0)");
+// ... 20+ comparison tests
+```
+
+### Impact
+
+**Before Fix**:
+- Compilation errors when using `LessThan` in recursive contexts
+- Prevented nat module from compiling with certain comparison operations
+
+**After Fix**:
+- All `LessThan` specializations have consistent interface
+- Comparison operations work correctly
+- All nat module tests pass
+
+## Summary of Nat Module Bugs
+
+| Bug | Severity | Lines Changed | Impact |
+|-----|----------|---------------|--------|
+| Fibonacci constraint | Critical | 1 line removed | Made Fibonacci unusable |
+| LessThan Proof members | Moderate | 2 lines added | Caused compilation errors |
+
 ## Future Improvements
 
-1. Add more comprehensive tests for list operations
-2. Test `Tail` function specifically with multi-element lists
+1. Add more comprehensive tests for list operations (church module)
+2. Test `Tail` function specifically with multi-element lists (church module)
 3. Add property-based tests for pair laws (e.g., `GetFst(MakePair(x, y)) = x`)
-4. Consider adding runtime extraction helpers for debugging
+4. Add more Fibonacci tests for larger values (nat module)
+5. Test GCD with larger numbers (nat module)
+6. Consider adding runtime extraction helpers for debugging

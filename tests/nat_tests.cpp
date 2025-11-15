@@ -2,7 +2,7 @@
 
 import typical.nat;
 
-using namespace typical;
+using namespace typical::nat;
 
 // ============================================================================
 // Test Natural Number Classification

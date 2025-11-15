@@ -6,7 +6,7 @@ export module typical.nat;
 
 import typical.eq;
 
-export namespace typical {
+export namespace typical::nat {
 
 struct Z {};
 
@@ -456,4 +456,4 @@ template <Nat N>
 inline constexpr bool is_odd_v = !is_even_v<N>;
 
 
-}; // namespace typical
+}; // namespace typical::nat

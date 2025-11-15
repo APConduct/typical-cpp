@@ -12,6 +12,10 @@ All notable changes to the Typical project are documented in this file.
   - `tests/lambda_advanced_tests.cpp` - 130+ assertions for advanced features
   - `tests/church_tests.cpp` - 40+ assertions for Church encodings
   - `tests/nat_tests.cpp` - 100+ assertions for natural number operations
+- **Example program** demonstrating all features
+  - `examples/01/main.cpp` - 270 lines comprehensive demo
+  - Shows lambda calculus, Church encodings, and Peano arithmetic
+  - Runtime output of compile-time computations
 - **Test documentation** (25KB+ total)
   - `tests/README.md` - Comprehensive test documentation
   - `tests/QUICK_REFERENCE.md` - Quick lookup guide for common patterns
@@ -97,6 +101,16 @@ All notable changes to the Typical project are documented in this file.
   - **Verification**: All comparison tests now pass
   - **Affected Functions**: All comparison operations using LessThan
 
+### Improved
+
+#### Module Organization
+- **nat.ixx: Moved to typical::nat namespace**
+  - **Problem**: Naming conflicts between lambda module and nat module (`Zero`, `One`, `Two`, etc.)
+  - **Solution**: Wrapped nat module types in `typical::nat` namespace
+  - **Impact**: Users must now use `typical::nat::Zero` or `using namespace typical::nat`
+  - **Benefit**: Clean separation between Church numerals and Peano numbers
+  - **Migration**: Update code to use `typical::nat::` prefix or appropriate using declarations
+
 ### Changed
 
 #### Build System
@@ -118,6 +132,7 @@ All notable changes to the Typical project are documented in this file.
 - **Test suite size**: 1,150+ lines of test code
 - **Documentation**: 25KB+ of test documentation
 - **Pass rate**: 100% (4/4 test suites)
+- **Example code**: 270 lines demonstrating all features
 
 ## [1.0.0] - Initial Release
 
@@ -164,7 +179,13 @@ No breaking changes. All existing code continues to work.
 - If you were using `fibonacci_t` with values >= 2, it now works correctly (was previously broken).
 - Comparison operations using `LessThan` now compile correctly.
 
-**New Scripts**: You can now use `./debug.sh` for build+test or `./run_tests.sh` for flexible test running.
+**Namespace Changes**:
+- The nat module is now in `typical::nat` namespace to avoid conflicts with lambda module
+- Update your code: `using namespace typical::nat;` or use `typical::nat::` prefix
+
+**New Features**:
+- Example program at `examples/01/main.cpp` demonstrating all library features
+- Build scripts: `./debug.sh` for build+test, `./run_tests.sh` for flexible test running
 
 ## Future Plans
 

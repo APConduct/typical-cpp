@@ -1,4 +1,5 @@
 module;
+#include <cstddef>
 #include <type_traits>
 
 
@@ -166,15 +167,132 @@ struct ComposeEq<Eq<A, B>, Eq<B, C>> {
 
 // Type-level computation proofs
 
+template <typename Term1, typename Term2>
+struct EvalPreservesEq {
+    using Eval1 = eval_t<Term1>;
+    using Eval2 = eval_t<Term2>;
+
+    static constexpr bool preserves = ProvablyEqual<Term1, Term2> ? ProvablyEqual<Eval1, Eval2> : true;
+};
+
+template <typename Term1, typename Term2, size_t Index, typename Replacement>
+struct SubstPreservesEq {
+    using Subst1 = subst_t<Term1, Index, Replacement>;
+    using Subst2 = subst_t<Term2, Index, Replacement>;
+
+    static constexpr bool preserves = ProvablyEqual<Term1, Term2> ? ProvablyEqual<Subst1, Subst2> : true;
+};
 
 // Arithmetic proofs
 
+template <typename M, typename N>
+struct AddCommutative {
+    using Left = eval_t<App<App<Add, M>, N>>;
+    using Right = eval_t<App<App<Add, N>, M>>;
+
+    static constexpr bool commutative = std::is_same_v<Left, Right>;
+
+    using Proof = std::conditional_t<commutative, Eq<Left, Right>, void>;
+};
+
+template <typename M, typename N, typename P>
+struct AddAssociative {
+    using Left = eval_t<App<App<Add, eval_t<App<App<Add, M>, N>>>, P>>;
+    using Right = eval_t<App<App<Add, M>, eval_t<App<App<Add, N>, P>>>>;
+
+    static constexpr bool associative = std::is_same_v<Left, Right>;
+
+    using Proof = std::conditional_t<associative, Eq<Left, Right>, void>;
+};
+
+template <typename N>
+struct AddIdentity {
+    using Left = eval_t<App<App<Add, N>, Zero>>;
+    using Right = N;
+
+    static constexpr bool is_identity = std::is_same_v<Left, Right>;
+
+    using Proof = std::conditional_t<is_identity, Eq<Left, Right>, void>;
+};
+
+template <typename M, typename N, typename P>
+struct MulDistributive {
+    using Left = eval_t<App<App<Mul, M>, eval_t<App<App<Add, N>, P>>>>;
+    using Right = eval_t<App<App<Add, eval_t<App<App<Mul, M>, N>>>, eval_t<App<App<Mul, M>, P>>>>;
+
+    static constexpr bool distributive = std::is_same_v<Left, Right>;
+
+    using Proof = std::conditional_t<distributive, Eq<Left, Right>, void>;
+};
 
 // List proofs
+
+template <typename List>
+struct ListLengthProof {
+    using Length = eval_t<App<Length, List>>;
+
+    // IsNil
+    struct IsNil {
+        static constexpr bool value = std::is_same_v<List, Nil>;
+    };
+
+    template <typename L>
+    struct IsEmptyIffyLengthZero {
+        using IsEmpty = eval_t<App<IsNil, L>>;
+        using LengthIsZero = Eq<eval_t<App<Length, L>>, Zero>;
+
+        static constexpr bool holds = std::is_same_v<IsEmpty, True> == ProvablyEqual<eval_t<App<Length, L>>, Zero>;
+    };
+
+    template <typename List1, typename List2>
+    struct AppendLengthProof {
+        using Appended = eval_t<App<App<Append, List1>, List2>>;
+        using Len1 = eval_t<App<Length, List1>>;
+        using Len2 = eval_t<App<Length, List2>>;
+        using LenAppended = eval_t<App<Length, Appended>>;
+        using LenSum = eval_t<App<App<Add, Len1>, Len2>>;
+
+        static constexpr bool holds = std::is_same_v<LenAppended, LenSum>;
+
+        using Proof = std::conditional_t<holds, Eq<LenAppended, LenSum>, void>;
+    };
+};
+
+template <typename List>
+struct ReverseLengthProof {
+    using Reversed = eval_t<App<Reverse, List>>;
+    using OrigLen = eval_t<App<Length, List>>;
+    using RevLen = eval_t<App<Length, Reversed>>;
+
+    static constexpr bool holds = std::is_same_v<OrigLen, RevLen>;
+
+    using Proof = std::conditional_t<holds, Eq<OrigLen, RevLen>, void>;
+};
+
+template <typename Func, typename List>
+struct MapLengthProof {
+    using Mapped = eval_t<App<App<Map, Func>, List>>;
+    using OrigLen = eval_t<App<Length, List>>;
+    using MapLen = eval_t<App<Length, Mapped>>;
+
+    static constexpr bool holds = std::is_same_v<OrigLen, MapLen>;
+
+    using Proof = std::conditional_t<holds, Eq<OrigLen, MapLen>, void>;
+};
 
 
 // Function extensionality
 
+template <typename F, typename G>
+struct FunctionEq {
+    template <typename X>
+    using Applied = Eq<eval_t<App<F, X>>, eval_t<App<G, X>>>;
+
+    template <typename... Inputs>
+    struct ForInputs {
+        static constexpr bool equal = (ProvablyEqual<eval_t<App<F, Inputs>>, App<G, Inputs>> && ...);
+    };
+};
 
 // Proof tactics
 

@@ -21,6 +21,7 @@ target_sources(typical
     include/modules/typical/set.ixx
     include/modules/typical/nat.ixx
     include/modules/typical/calculus.ixx
+    include/modules/typical/refine.ixx
 )
 
 # Enable testing

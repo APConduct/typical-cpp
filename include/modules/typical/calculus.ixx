@@ -1,5 +1,7 @@
 module;
 #include <type_traits>
+#include <typeinfo>
+
 
 export module typical.calculus;
 
@@ -139,8 +141,11 @@ template <Expression E>
 inline constexpr bool is_constant_v = IsConstant<E>::value;
 
 // Differentiation
+//
+inline auto mul = [](auto a, auto b) { return a * b; };
 
-
+// type of mul
+inline auto& t_i = typeid(mul);
 
 
 } // namespace typical
